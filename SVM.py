@@ -40,10 +40,8 @@ def experiment(train_kernel, train_labels, test_kernel, test_labels, top_n, seed
 
         test_kernel = test_kernel[test_idx,:][:, train_idx]
         test_labels = [test_labels[i] for i in test_idx]
-    #Papers to read:
-    #A unified approach to interpreting model predictions - shap
-    #Grad-Cam: Visual Explanations from Deep Networks via Gradiant-based localization
-    classifier = svm.SVC(kernel='precomputed', class_weight='balanced',random_state=seed, C=C)#10, 5, 1, 0.5, 0.1 [10,1] [0.9, 0.8, ... 0.1], find best C value and store other results
+
+    classifier = svm.SVC(kernel='precomputed', class_weight='balanced',random_state=seed, C=C)
     classifier.fit(train_kernel,train_labels)
 
     y_pred = classifier.predict(test_kernel)
